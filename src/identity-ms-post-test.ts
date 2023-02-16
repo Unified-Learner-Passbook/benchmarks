@@ -12,9 +12,9 @@ export let options:Options = {
             gracefulStop: '5s',
             tags: {serviceTag: 'Cred-Schema'},
 
-            vus: 1,
-            iterations: 1,
-            maxDuration: '10s',
+            vus: 5,
+            iterations: 10,
+            maxDuration: '100s',
 
             exec: 'default'
         }
@@ -22,15 +22,9 @@ export let options:Options = {
     }
 };
 
-let params = {
-    headers: {
-        "Accept": "application/json",
-        'Content-Type': 'application/json'
-    }
-}
 
 export default () => {
-    http.post('http://localhost:3332/did/generate', JSON.stringify(requestBody.generateDIDBody), {
+    http.post('http://64.227.185.154:3000/did/generate', JSON.stringify(requestBody.generateDIDBody), {
         headers: { 'Content-Type': 'application/json' },
       })
 }
