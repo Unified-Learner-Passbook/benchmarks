@@ -23,5 +23,9 @@
   },
   "scripts": {
     "start": "webpack"
+  },
+  "dependencies": {
+    "@apideck/postman-to-k6": "^1.8.8",
+    "uuidv4": "^6.2.13"
   }
 }
