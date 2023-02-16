@@ -22,8 +22,15 @@ export let options:Options = {
 };
 
 export default () => {
+    const schemaDID = 'did:example:evfeb1f712ebc6f1a276e12ec21';
+    const schemaTags = '[marks]';
+    const templateID = 'cldv9t7q80000ijoau59z95cn';
     //get schema by did
-    http.get('http://64.227.185.154:3001/schema/jsonld?id=did:example:evfeb1f712ebc6f1a276e12ec21');
+    http.get('http://64.227.185.154:3001/schema/jsonld?id='+schemaDID);
     //get schema by tags
-    http.get('http://64.227.185.154:3001/schema/tags?tags=[marks]')
+    http.get('http://64.227.185.154:3001/schema/tags?tags='+schemaTags)
+    //get template by schema id
+    http.get('http://64.227.185.154:3001/rendering-template/'+schemaDID)
+    //get template by template id
+    http.get('http://64.227.185.154:3001/rendering-template?id='+templateID)
 };
