@@ -18,11 +18,13 @@ jobs:
         run: |
           yarn --frozen-lockfile
 
-      - name: Transpile and bundle test script
-        run: |
-          yarn webpack
-
-      # - name: Run local k6 test
-      #   uses: grafana/k6-action@v0.2.0
-      #   with:
-      #     filename: dist/get-200-status-test.js
+#       - name: Transpile and bundle test script
+#         run: |
+#           yarn webpack
+          
+      - name: Run k6 cloud test
+        uses: k6io/action@v0.1
+        with:
+          filename: dist/cred-schema-ms-get-test.js
+          cloud: true
+          token: ${{ secrets.K6_CLOUD_API_TOKEN }}
