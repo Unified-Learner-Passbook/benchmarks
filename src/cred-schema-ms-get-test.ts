@@ -1,6 +1,7 @@
+import { SharedArray } from "k6/data";
 import http from "k6/http";
 import { Options } from "k6/options";
-import{check, sleep} from "k6";
+import papaparse from './papaparse.min.js';
 
 export let options:Options = {
     scenarios: {
@@ -11,9 +12,9 @@ export let options:Options = {
             gracefulStop: '5s',
             tags: {serviceTag: 'Cred-Schema'},
 
-            vus: 50,
-            iterations: 100,
-            maxDuration: '10s',
+            vus: 100,
+            iterations: 500,
+            maxDuration:'10s',
 
             exec: 'default'
         }
@@ -21,16 +22,27 @@ export let options:Options = {
     }
 };
 
+const csvRead = new SharedArray("credentials", function() {
+    return papaparse.parse(open('../assets/templateIDs.csv'), {header: true}).data;
+});
+
 export default () => {
+    
     const schemaDID = 'did:example:evfeb1f712ebc6f1a276e12ec21';
     const schemaTags = '[marks]';
-    const templateID = 'cldv9t7q80000ijoau59z95cn';
+    // var csv = papaparse.parse(open('assets/templateIDs.csv'),{
+    //     download:false,
+    // });
+    console.log(csvRead);
+    
     //get schema by did
-    http.get('http://64.227.185.154:3001/schema/jsonld?id='+schemaDID);
+    http.get(`http://${__ENV.HOST}/schema/jsonld?id=`+schemaDID);
     //get schema by tags
-    http.get('http://64.227.185.154:3001/schema/tags?tags='+schemaTags)
+    http.get(`http://${__ENV.HOST}/schema/tags?tags=`+schemaTags);
     //get template by schema id
-    http.get('http://64.227.185.154:3001/rendering-template/'+schemaDID)
+    http.get(`http://${__ENV.HOST}/rendering-template/`+schemaDID)
     //get template by template id
-    http.get('http://64.227.185.154:3001/rendering-template?id='+templateID)
+    //http.get('http://${__ENV.HOST}/rendering-template?id=')
 };
+
+

@@ -21,5 +21,5 @@ export let options:Options = {
 };
 
 export default () => {
-    http.get('http://64.227.185.154:3000/did/resolve/did:ulp:0bc51dad-885c-44a8-8e95-e3d160060bd2')
+    http.get(`http://${__ENV.HOST}/did/resolve/did:ulp:0bc51dad-885c-44a8-8e95-e3d160060bd2`)
 }

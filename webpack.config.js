@@ -10,6 +10,7 @@ module.exports = {
     path: path.join(__dirname, 'dist'),
     libraryTarget: 'commonjs',
     filename: '[name].js',
+    hashFunction: require('xxhash-addon').XXHash64,
   },
   resolve: {
     extensions: ['.ts', '.js'],

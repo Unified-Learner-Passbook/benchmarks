@@ -24,7 +24,7 @@ export let options:Options = {
 
 
 export default () => {
-    http.post('http://64.227.185.154:3000/did/generate', JSON.stringify(requestBody.generateDIDBody), {
+    http.post(`${__ENV.HOST}/did/generate`, JSON.stringify(requestBody.generateDIDBody), {
         headers: { 'Content-Type': 'application/json' },
       })
 }
