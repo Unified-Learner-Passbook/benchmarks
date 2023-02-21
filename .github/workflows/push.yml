@@ -20,6 +20,7 @@ jobs:
 
       - name: Transpile and bundle test script
         run: |
+          export NODE_OPTIONS=--openssl-legacy-provider
           yarn webpack
           
       - name: Run k6 cloud test
