@@ -12,8 +12,8 @@ export let options:Options = {
             gracefulStop: '5s',
             tags: {serviceTag: 'Cred-Schema'},
 
-            vus: 100,
-            iterations: 500,
+            vus: 10,
+            iterations: 50,
             maxDuration:'10s',
 
             exec: 'default'
@@ -27,20 +27,15 @@ const csvRead = new SharedArray("credentials", function() {
 });
 
 export default () => {
-    
-    const schemaDID = 'did:example:evfeb1f712ebc6f1a276e12ec21';
     const schemaTags = '[marks]';
-    // var csv = papaparse.parse(open('assets/templateIDs.csv'),{
-    //     download:false,
-    // });
     console.log(csvRead);
     
     //get schema by did
-    http.get(`http://${__ENV.HOST}/schema/jsonld?id=`+schemaDID);
+    http.get(`http://${__ENV.HOST='64.227.185.154:3001'}/schema/jsonld?id=${__ENV.SCHEMA_ID='did:example:evfeb1f712ebc6f1a276e12ec21'}`);
     //get schema by tags
-    http.get(`http://${__ENV.HOST}/schema/tags?tags=`+schemaTags);
+    http.get(`http://${__ENV.HOST='64.227.185.154:3001'}/schema/tags?tags=`+schemaTags);
     //get template by schema id
-    http.get(`http://${__ENV.HOST}/rendering-template/`+schemaDID)
+    http.get(`http://${__ENV.HOST='64.227.185.154:3001'}/rendering-template/${__ENV.SCHEMA_ID='did:example:evfeb1f712ebc6f1a276e12ec21'}`)
     //get template by template id
     //http.get('http://${__ENV.HOST}/rendering-template?id=')
 };
