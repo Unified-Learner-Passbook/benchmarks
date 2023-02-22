@@ -4,6 +4,15 @@ import { Options } from "k6/options";
 import papaparse from './papaparse.min.js';
 
 export let options:Options = {
+    ext: {
+
+        loadimpact: {
+    
+          projectID: 3627304,
+    
+        },
+    
+      },
     scenarios: {
         get_scenario:{
             executor: 'shared-iterations',
